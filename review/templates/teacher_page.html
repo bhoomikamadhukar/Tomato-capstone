@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Teacher</title>
+	</head>
+	<body>
+		
+		{% for teacher in teacher_institute %}
+			<p>Name:{{teacher.teacher_name}}</p>
+			<p>Email:{{teacher.email}}</p>
+			<p>Phone:{{teacher.phone}}</p>
+			<p>Qualification{{teacher.qualification}}</p>
+			<p>Designation: {{teacher.designation}}</p>
+			<p>Rating: {{teacher.rating}}</p>
+		{% endfor %}
+	</body>
+</html>

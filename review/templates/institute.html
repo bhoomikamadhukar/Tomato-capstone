@@ -1,0 +1,138 @@
+{% extends 'base.html' %}
+{% block meta %}
+{% endblock %}
+{% block nav-right %}
+	<a class="nav-item nav-link" href="/login/">Login</a>
+	<a class="nav-item nav-link" href="/signup/">Signup</a>
+{% endblock %}
+{% block body %}
+	<div style="background-image: url({{institution.cover.url}}); height: 60vh; background-size: cover; background-position: bottom center;">
+		<div style="width: 100%; height:100%;
+			top:0; left:0;
+			background:rgba(0,0,0,0.9); padding: 50px 100px;">
+			<div style="color:#fff; max-width: 50vw">
+				<h1 style="font-size: 42px; font-weight: 700; font-family: 'Montserrat', sans-serif;">{{institution.name}} </h1>
+				<p class="card-text">Location: <b>{{institution.location}}</b></p>
+				<p>{{institution.summary}}</p>
+				<p><span style="font-weight: 700; font-size:25px">{% for i in institution.rating %}<i class="icon ion-md-star" style="color:#FFD700"></i>
+				{% endfor %}</span></p>
+				
+				<a href="{{institution.website}}" target="_blank" class="btn btn-sm btn-outline-light">Visit Official Website</a>
+				<a  data-toggle="modal" data-target="#review-modal" class="btn btn-sm btn-outline-light">Write Review</a>
+				<a href="/institute/{{institution.id}}/department"  class="btn btn-sm btn-danger">See Faculty</a>
+			</div>
+		</div>
+	</div>
+	<br><br><br>
+	<div class="container">
+		<h2>Top Reviews</h2><br>
+		<div class="row">
+			<div class="col-md-8">
+				{% for review in institution_feedback %}
+					<div style="width:100%;
+						border:1px solid #eee;
+						border-radius: 5px;
+						box-shadow: 3px 3px 5px #eee;
+						padding: 30px">
+						<div class="row">
+							<div class="col-md-6">
+								<h4><b>{{review.user.username}}</b></h4>
+								<span>{{review.timestamp|timesince}} ago</span><br>
+								<hr>
+								<p>{{review.comments}}</p>
+							</div>
+							<div class="col-md-6">
+								
+								<br>
+								
+								<div class="row">
+									<div class="col-md-6">
+										<p style=" line-height: 0.5"><b>Infrastructure</b></p>
+										
+										<span style="font-size:18px; line-height: 1">
+											{% for i in review.Rinfrastructure %}
+												<i class="icon ion-md-star" style="color:#FFD700"></i>
+											{% endfor %}
+										</span>
+										<br><br>
+									</div>
+									<div class="col-md-6">
+										<p style=" line-height: 0.5"><b>Faculty</b></p>
+										
+										<span style="font-size:18px; line-height: 1">
+											{% for i in review.Rfaculty %}
+												<i class="icon ion-md-star" style="color:#FFD700"></i>
+											{% endfor %}
+										</span>
+										<br><br>
+									</div>
+									<div class="col-md-6">
+										<p style=" line-height: 0.5"><b>Management</b></p>
+										
+										<span style="font-size:18px; line-height: 1">
+											{% for i in review.Rmanagement %}
+												<i class="icon ion-md-star" style="color:#FFD700"></i>
+											{% endfor %}
+										</span>
+										<br><br>
+									</div>
+									<div class="col-md-6">
+										<p style=" line-height: 0.5"><b>Placements</b></p>
+										
+										<span style="font-size:18px; line-height: 1">
+											{% for i in review.Rplacements %}
+												<i class="icon ion-md-star" style="color:#FFD700"></i>
+											{% endfor %}
+										</span>
+										<br><br>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<br>
+				{% endfor %}
+			</div>
+			<div class="col-md-4">
+				
+			</div>
+		</div>
+		
+	</div>
+	<br><br><br>
+	<div class="modal" tabindex="-1" role="dialog" id="review-modal">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title">Review {{institution.name}} </h5>
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+					</button>
+				</div>
+				<div class="modal-body">
+					<form action="/institute_feedback/{{institution.id}}/" method="post">
+						{% csrf_token %}
+						
+						<label for="infrastructure">Infrastructure</label>
+						<input class="form-control" type="number" name="infrastructure" max=5 required>
+						<br>
+						<label for="placements">Placements</label>
+						<input class="form-control" type="number" name="placements" max=5 required>
+						<br>
+						<label for="faculty">Faculty</label>
+						<input class="form-control" type="number" name="faculty" max=5 required>
+						<br>
+						<label for="management">Management</label>
+						<input class="form-control" type="number" name="management" max=5 required>
+						<br>
+						<label for="comment">Review</label>
+						<input class="form-control" type="text" name="comment" required>
+						<br>
+						<input class="btn btn-md btn-danger" type="submit" name="submit">
+					</form>
+				</div>
+				
+			</div>
+		</div>
+	</div>
+{% endblock %}

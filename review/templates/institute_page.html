@@ -1,0 +1,57 @@
+
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+	<head>
+		<meta charset="utf-8">
+		<title>Institute</title>
+		<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+		<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+	</head>
+	<body>
+		<nav class="navbar navbar-expand-lg navbar-light bg-light">
+			<a class="navbar-brand" href="/home/">KYC</a>
+			<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+			<span class="navbar-toggler-icon"></span>
+			</button>
+			<div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+				<div class="navbar-nav">
+					<a class="nav-item nav-link" href="/login/">Logout</a>
+					
+					<a class="nav-item nav-link" href="/signup/">Home</a>
+				</div>
+			</div>
+		</nav>
+		<div class="row no-gutters" style="margin-top: 5%;">
+			<!--    <div class="col-md-4"> -->
+			<img src="{{institute.cover.url}}" >
+		</div>
+		
+		<!-- <div class="col-md-8"> -->
+		<div class="card-body">
+			
+			
+			<h4 class="card-title" style="font-size: 30px; font-family: 'Crimson Text', serif;"><b>{{institution.name}}</h4>
+			
+			<h5 class="card-title" style="font-size: 30px; font-family: 'Crimson Text', serif;">Location: {{institution.location}}</h5>
+			<h5 class="card-title" style="font-size: 30px; font-family: 'Crimson Text', serif;">Rating: {{institution.average_rating}}</h5><br><br>
+			<h3>What the students have to say</h3>
+			
+			<div class="container" style="background-color: #fafafa; padding: 10px;">
+				{% for institute in institution_feedback %}
+					<p>{{institute.user.username}}</p>
+					<p>Infrastructure: {{institute.infrastructure}}</p>
+					<p>Placements: {{institute.placements}}</p>
+					<p>Faculty: {{institute.faculty}}</p>
+					<p>Management: {{institute.management}}</p>
+					<p>Comments: {{institute.comments}}</p>
+					
+				{% endfor %}
+			</div>
+		</div>
+		<a href='/institute_feedback/{{institution.id}}/'><button type="submit">submit</button></a>
+	</div>
+
+
+	<script src="https://unpkg.com/ionicons@4.5.5/dist/ionicons.js"></script>
+</body>
+</html>

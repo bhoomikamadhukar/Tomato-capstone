@@ -1,0 +1,42 @@
+
+
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Sign Up</title>
+		<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+	</head>
+	<body>
+		
+		<div class="container">
+			<div class="card center" style="width: 40rem; margin:9% 22%;">
+				<br><br>
+				
+				<h2 style="text-align: center;">Sign Up! 🔒</h2>
+				<br><br>
+				<div class="container">
+					<form action="/signup/" method="POST">
+						{% csrf_token %}
+						<div class="form-group">
+							<input class="form-control" type="text" placeholder="Firstname" name="usn">
+						</div>
+						<div class="form-group">
+							<input class="form-control" type="text" placeholder="Firstname" name="fullname">
+						</div>
+						<div class="form-group">
+							<input class="form-control" type="text" placeholder="Email" name="email">
+						</div>
+						<div class="form-group">
+							<input class="form-control" type="username" placeholder="Username" name="username">
+						</div>
+						<div class="form-group">
+							<input class="form-control" type="password" placeholder="password" name="password">
+						</div>
+						<div class="form-group">
+							<input class="btn btn-md btn-success" type="submit">
+						</div>
+					</form>
+				</div>
+			</div>
+		</body>
+	</html>

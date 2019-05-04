@@ -1,0 +1,60 @@
+{% extends 'base.html' %}
+{% block meta %}
+{% endblock %}
+{% block nav-right %}
+	<a class="nav-item nav-link" href="/login/">Login</a>
+	<a class="nav-item nav-link" href="/signup/">Signup</a>
+{% endblock %}
+{% block body %}
+	<div style="background-image: url({{institution.cover.url}}); height: 50vh; background-size: cover; background-position: bottom center;">
+		<div style="width: 100%; height:100%;
+			top:0; left:0;
+			background:rgba(0,0,0,0.9); padding: 50px 120px;">
+			<div class="row" style="color:#fff; max-width: 100vw">
+				<div class="col-md-7">
+					
+					<h1 style="font-size: 42px; font-weight: 700; font-family: 'Montserrat', sans-serif;">Faculty</h1>
+					<h1 style="font-size: 22px; font-weight: 700; font-family: 'Montserrat', sans-serif;">{{institution.name}} </h1>
+					<p class="card-text">Location: <b>{{institution.location}}</b></p>
+					<p>{{institution.summary}}</p>
+					<p><span style="font-weight: 700; font-size:25px">{% for i in institution.rating %}<i class="icon ion-md-star" style="color:#FFD700"></i>
+					{% endfor %}</span></p>
+				</div>
+				<div class="col-md-5">
+					<h4>See Department wise Faculty</h4>
+					<form class="form-inline" action="/institute/{{institution.id}}/department/" method="post">
+						{% csrf_token %}
+						<select class="form-control" style="background: transparent; color: white; margin-right: 10px" name="department">  <option>All </option>
+							<option style="color:#555" value="CSE">Computer Science</option>
+							<option style="color:#555" value="ISE">Information Science</option>
+							<option style="color:#555" value="ECE">Electronics and communication</option>
+							<option style="color:#555" value="EEE">Electrical</option>
+						</select>
+						<button class="btn btn-md btn-primary" type="submit">See</button>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+	<br><br>
+	<div class="container">
+		<div class="row">
+			{% for teacher in teacher_institute %}
+				<div class="card" style="width: 300px; margin-right: 10px; box-shadow: 2px 2px 10px #eee; border-radius: 5px">
+					<div class="card-body">
+						
+						<a href="/teacher/{{teacher.id}}/"><p style="line-height: 1; font-size: 20px; font-weight: 700">{{teacher.teacher_name}}</p></a>
+						<span>{{teacher.designation}}</span>
+						<hr>
+						<p>Email:{{teacher.email}}</p>
+						<p>Phone:{{teacher.phone}}</p>
+						<p>Qualification: {{teacher.qualification}}</p>
+						<p>Rating: {{teacher.rating}}</p>
+					</div>
+				</div>
+			{% endfor %}
+		</div>
+		
+	</div>
+	<br><br><br>
+{% endblock %}
